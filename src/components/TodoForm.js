@@ -30,7 +30,10 @@ class TodoForm extends React.Component {
                 <button onClick={(e)=>{
                     e.preventDefault();
                     this.props.onSubmit(this.state.values)}}>Add New Task</button>
-                <button>Clear Completed Tasks</button>
+                <button onClick={e=>{
+                    e.preventDefault();
+                    this.props.clearCompleted();
+                }}>Clear Completed Tasks</button>
             </form>
          );
     }

@@ -24,15 +24,25 @@ class App extends React.Component {
   }
   }
 
+  clearCompleted = () =>{
+    this.setState({
+      tasks: this.state.tasks.filter((task)=>{return task.completed === false})
+    })
+  }
+
   toggleCompleted = taskID =>{
     console.log('this was clicked', taskID)
-    this.state.tasks.map(task =>{
-      if(task.id === taskID){
-        return {
-          ...tasks,
-          completed: !task.completed
+    this.setState({
+      tasks: this.state.tasks.map(task =>{
+        if(task.id === taskID){
+          return{
+            ...task,
+            completed: !task.completed
+          }
+        }else{
+          return task
         }
-      }
+      })
     })
   }
 
@@ -59,7 +69,7 @@ class App extends React.Component {
       <div>
         <h2>Welcome to your Todo App!</h2>
         <TodoList allTasks={this.state.tasks} toggleCompleted={this.toggleCompleted}/>
-        <TodoForm onSubmit={this.onSubmit} />
+        <TodoForm onSubmit={this.onSubmit} clearCompleted={this.clearCompleted} />
       </div>
     );
   }
