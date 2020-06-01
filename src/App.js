@@ -2,18 +2,25 @@ import React from 'react';
 import TodoList from './components/TodoList'
 import TodoForm from './components/TodoForm'
 
-const tasks = [
-  {
-    task: 'Organize Garage',
-    id: 1528817077286,
-    completed: false
-  },
-  {
-    task: 'Bake Cookies',
-    id: 1528817084358,
-    completed: false
-  }
-]
+let tasks;
+
+if(localStorage.getItem('tasks') === null){
+  tasks = [
+    {
+      task: 'Organize Garage',
+      id: 1528817077286,
+      completed: false
+    },
+    {
+      task: 'Bake Cookies',
+      id: 1528817084358,
+      completed: false
+    }
+  ];
+}else {
+  tasks = localStorage.getItem('tasks').toString()
+}
+
 
 class App extends React.Component {
   constructor(){
@@ -57,8 +64,9 @@ class App extends React.Component {
       tasks: [...this.state.tasks, newTask]
     })
 
+
     this.setState({
-      values: ''
+        values: ''
     })
   }
   // you will need a place to store your state in this component.
